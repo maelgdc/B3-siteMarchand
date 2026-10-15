@@ -33,12 +33,12 @@ try {
             ":tel" => $tel
         ]);
     } else {
-        header("location:./index.php?page=inscription&erreur=2");
+        header("location:./index.php?page=inscription&erreur=3");
     }
 
 } catch (PDOException $monException) {
     echo "Erreur SQL : " . $monException->getMessage();
-    header("location:./index.php?page=inscription&erreur=3");
+    header("location:./index.php?page=inscription&erreur=2");
 }
 
 $requete_sql = "SELECT * FROM client WHERE pseudo='$pseudo'";
