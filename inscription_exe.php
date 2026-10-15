@@ -8,7 +8,7 @@ $nom = htmlspecialchars($_POST["nom"]);
 $prenom = htmlspecialchars($_POST["prenom"]);
 $tel = htmlspecialchars($_POST["tel"]);
 $mail = htmlspecialchars($_POST["email"]);
-
+$clientTest = null;
 
 try {
     $requete_sql = "SELECT * FROM client WHERE pseudo='$pseudo'";
