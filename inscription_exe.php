@@ -8,7 +8,7 @@ $nom = htmlspecialchars($_POST["nom"]);
 $prenom = htmlspecialchars($_POST["prenom"]);
 $tel = htmlspecialchars($_POST["tel"]);
 $mail = htmlspecialchars($_POST["email"]);
-
+$clientTest = null;
 
 try {
     $requete_sql = "SELECT * FROM client WHERE pseudo='$pseudo'";
@@ -33,12 +33,12 @@ try {
             ":tel" => $tel
         ]);
     } else {
-        header("location:./index.php?page=inscription&erreur=2");
+        header("location:./index.php?page=inscription&erreur=3");
     }
 
 } catch (PDOException $monException) {
     echo "Erreur SQL : " . $monException->getMessage();
-    header("location:./index.php?page=inscription&erreur=3");
+    header("location:./index.php?page=inscription&erreur=2");
 }
 
 $requete_sql = "SELECT * FROM client WHERE pseudo='$pseudo'";

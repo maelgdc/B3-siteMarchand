@@ -1,0 +1,2 @@
+ALTER TABLE `client` ADD UNIQUE(`PSEUDO`); 
+ALTER TABLE `users` ADD UNIQUE(`login`); 
