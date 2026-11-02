@@ -1,4 +1,3 @@
-
         <div class="container text-center m-auto p-2">
             <div class="row m-3">
                 <div class="card col text-center m-4">
@@ -24,7 +23,7 @@
                         <h5 class="card-title fs-4">Dragon ball Tome 1</h5>
                         <p class="card-text m-2 fs-5">7€</p>
                     </div>
-                </div>
+                </div><?php echo $_ENV['encryption']; ?>
             </div>
         </div>
 </div>
