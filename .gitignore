@@ -1,2 +1,23 @@
 #Eviter la mise à jour des données de connexion à la base de données
 info_bdd.php
+
+#Ajout partie 4 Gestion des secrets
+# Dépendances
+/vendor/
+
+# Fichiers d'environnement
+.env
+.env.local
+.env.*.local
+
+# Logs et cache
+/var/log/*
+/var/cache/*
+/storage/logs/*
+/storage/framework/cache/*
+/tmp/
+*.log
+
+# Tests et couverture
+/coverage/
+.phpunit.result.cache
