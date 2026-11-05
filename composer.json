@@ -1,5 +1,10 @@
 {
+    "name": "mycompany/b3-site",
     "require": {
         "dotenv-org/phpdotenv-vault": "^0.2.4"
+    },
+    "require-dev": {
+        "phpdocumentor/phpdocumentor": "^3.10",
+        "league/uri": "~7.5.0"
     }
 }
