@@ -1,4 +1,10 @@
 <?php
+
+require_once __DIR__ . '/vendor/autoload.php';
+
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
+
 require './info_bdd.php';
 $page_autorise=['acceuil','produit','admin','connexion','connexionClient','inscription','detailProduit','commande_exe','panier','gestionCommande_exe','commande','apropos','mentionLegales'];
 
