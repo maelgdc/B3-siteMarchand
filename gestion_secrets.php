@@ -1,9 +1,8 @@
 <?php
 require_once __DIR__ . '/vendor/autoload.php';
 
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
-$dotenv->load();
 $hash_key = $_ENV['hash'];
+
 $crypt_key = $_ENV['encryption'];
 
 /**
@@ -16,7 +15,7 @@ function hasher_mdp (string $mdp): string {
 	$hashed_mdp = hash_hmac(
 	'sha256',
 	$mdp,
-	$hash_key
+	$_ENV['hash']
 );
 	return $hashed_mdp;
 }
@@ -40,8 +39,9 @@ function verifier_mdp(string $mdp, string $hash): bool {
 *@return string $donnee_chiffre La donnee chiffree
 */
 function chiffrer_donnee (string $donnee, string $cle_chiffrement): string {
-	$donnee_chiffre = openssl_encrypt($donnee, 'aes-256-cbc', $cle_chiffrement);
-	return $donnee_chiffre;
+	$iv = '1234567890123456';
+	$donnee_chiffre = openssl_encrypt($donnee, 'aes-256-cbc', $cle_chiffrement, OPENSSL_RAW_DATA, $iv);
+	return base64_encode($donnee_chiffre);
 }
 
 /**
@@ -52,6 +52,7 @@ function chiffrer_donnee (string $donnee, string $cle_chiffrement): string {
 *@return string $donnee_claire La donnee dechiffree
 */
 function dechiffrer_donnee (string $donnee_chiffree, string $cle_dechiffrement): string {
-	$donnee_claire = openssl_decrypt($donnee_chiffree, 'aes-256-cbc', $cle_dechiffrement);
+	$iv = '1234567890123456';
+	$donnee_claire = openssl_decrypt(base64_encode($donnee_chiffree), 'aes-256-cbc', $cle_dechiffrement, OPENSSL_RAW_DATA, $iv);
 	return $donnee_claire;
 }
