@@ -23,7 +23,7 @@
                         <h5 class="card-title fs-4">Dragon ball Tome 1</h5>
                         <p class="card-text m-2 fs-5">7€</p>
                     </div>
-                </div><?php echo $_ENV['encryption']; ?>
+                </div>
             </div>
         </div>
 </div>

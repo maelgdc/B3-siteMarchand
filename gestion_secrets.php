@@ -41,7 +41,7 @@ function verifier_mdp(string $mdp, string $hash): bool {
 */
 function chiffrer_donnee (string $donnee, string $cle_chiffrement): string {
 	$donnee_chiffre = openssl_encrypt($donnee, 'aes-256-cbc', $cle_chiffrement);
-	return $donnee_chiffree;
+	return $donnee_chiffre;
 }
 
 /**
