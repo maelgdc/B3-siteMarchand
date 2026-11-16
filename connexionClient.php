@@ -36,10 +36,10 @@ switch ($codeErreur) {
         ?>
         <form class="m-4" action="./connexionClient_exe.php" method="POST">
             <label for="pseudo">Pseudo :</label><br>
-            <input type="text" id="pseudo" name="pseudo" default=""><br><br>
+            <input type="text" id="pseudo" name="pseudo" default="" required><br><br>
 
             <label for="motDePasse">Mot de Passe :</label><br>
-            <input type="password" id="motDePasse" name="mdp" default=""><br><br>
+            <input type="password" id="motDePasse" name="mdp" default="" required><br><br>
 
 
             <button type="submit" class="btn btn-primary">Valider</button>

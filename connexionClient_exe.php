@@ -1,30 +1,39 @@
 <?php
-$pseudoCo = $_POST["pseudo"];
-$mdpCo = $_POST["mdp"];
+$pseudoCo = htmlspecialchars($_POST["pseudo"]);
+$mdpCo = htmlspecialchars($_POST["mdp"]);
 
 require './info_bdd.php';
-if (strlen($pseudoCo) < 1) {
-    header("location:./index.php?page=connexionClient&erreur=1");
-} else if ($mdpCo == "") {
-    header("location:./index.php?page=connexionClient&erreur=2");
-} else {
-    $requete_sql = "SELECT * FROM client WHERE pseudo='$pseudoCo'";
-    $reponse = $mon_pdo->query($requete_sql); // exécution
-    $resultat = $reponse->fetch(); // récupère tous les résultats
-    if ($resultat && $mdpCo == $resultat['MDP']) {
-        $tmpPath = __DIR__.'/tmp';
-        if(is_dir($tmpPath)){
-            session_save_path($tmpPath);
-        }
-        session_start();
-        $_SESSION['client'] = $resultat["PSEUDO"];
-        $_SESSION['idClient'] = $resultat["IDCLIENT"];
-        header("location:./index.php?page=produit&connexion=true");
-    } else {
-        header("location:./index.php?page=connexion&erreur=3");
-    }
+require './gestion_secrets.php';
 
+$crypt_key = $_ENV['encryption'];
+
+$pseudo_chif = chiffrer_donnee($pseudoCo, $crypt_key);
+
+
+$requete_sql = "SELECT * FROM client WHERE pseudo = :pseudo";
+
+$reponse = $mon_pdo->prepare($requete_sql);
+
+$reponse->execute([
+    ':pseudo' => $pseudo_chif
+]);
+
+$client = $reponse->fetch(PDO::FETCH_ASSOC);
+
+if ($client && verifier_mdp($mdpCo, $client['MDP'])) {
+    $tmpPath = __DIR__ . '/tmp';
+    if (is_dir($tmpPath)) {
+        session_save_path($tmpPath);
+    }
+    session_start();
+    $_SESSION['client'] = dechiffrer_donnee($client["PSEUDO"], $crypt_key);
+    $_SESSION['idClient'] = $client["IDCLIENT"];
+    header("location:./index.php?page=produit&connexion=true");
+} else {
+    header("location:./index.php?page=connexion&erreur=3");
 }
+
+
 
 if (isset($_GET["deco"])) {
     $_SESSION = array();
@@ -46,4 +55,3 @@ if (isset($_GET["deco"])) {
     session_destroy();
     header("location:./index.php?page=acceuil");
 }
-?>

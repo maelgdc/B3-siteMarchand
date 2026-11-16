@@ -53,6 +53,6 @@ function chiffrer_donnee (string $donnee, string $cle_chiffrement): string {
 */
 function dechiffrer_donnee (string $donnee_chiffree, string $cle_dechiffrement): string {
 	$iv = '1234567890123456';
-	$donnee_claire = openssl_decrypt(base64_encode($donnee_chiffree), 'aes-256-cbc', $cle_dechiffrement, OPENSSL_RAW_DATA, $iv);
+	$donnee_claire = openssl_decrypt(base64_decode($donnee_chiffree), 'aes-256-cbc', $cle_dechiffrement, OPENSSL_RAW_DATA, $iv);
 	return $donnee_claire;
 }

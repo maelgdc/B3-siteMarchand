@@ -38,7 +38,6 @@ if ($mdp != $mdpConf) {
 } else {
     $resultat = false;
     try {
-        echo(sizeof($clientTest));
         if (sizeof($clientTest) == 0) {
             $requeteInsertion = "INSERT INTO `client` (`IDCLIENT`, `PSEUDO`, `MDP`, `NOM`, `PRENOM`, `MAIL`, `TEL`) VALUES (NULL, :pseudo, :mdp, :nom, :prenom, :mail, :tel);";
             $statement = $mon_pdo->prepare($requeteInsertion);
