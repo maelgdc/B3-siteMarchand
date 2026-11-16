@@ -38,7 +38,7 @@ switch ($codeErreur) {
             <div class="m-4 d-flex justify-content-evenly">
                 <div>
                     <label for="pseudo">Pseudo : *</label><br>
-                    <input required type="text" id="identifiant" name="pseudo" minlength="4"><br><br>
+                    <input required type="text" id="pseudo" name="pseudo" minlength="4"><br><br>
 
                     <label for="motDePasse">Mot de Passe : * <br> Majuscules, minuscules, chiffres et symboles</label><br>
                     <input required type="password" id="motDePasse" name="mdp" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^a-zA-Z0-9]).{12,}$"><br><br>
