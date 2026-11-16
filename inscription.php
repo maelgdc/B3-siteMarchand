@@ -25,39 +25,39 @@ switch ($codeErreur) {
     <div class="p-5" id="formLogin">
         <?php
         if ($ereur != "") {
-            ?>
+        ?>
             <div class="alert alert-warning">
                 <p><?php
-                echo $ereur;
-                ?></p>
+                    echo $ereur;
+                    ?></p>
             </div>
-            <?php
+        <?php
         }
         ?>
         <form class="d-flex flex-column" action="./inscription_exe.php" method="POST">
             <div class="m-4 d-flex justify-content-evenly">
                 <div>
                     <label for="pseudo">Pseudo : *</label><br>
-                    <input required type="text" id="identifiant" name="pseudo" default=""><br><br>
+                    <input required type="text" id="identifiant" name="pseudo" minlength="4"><br><br>
 
-                    <label for="motDePasse">Mot de Passe : *</label><br>
-                    <input required type="password" id="motDePasse" name="mdp" default=""><br><br>
+                    <label for="motDePasse">Mot de Passe : * <br> Majuscules, minuscules, chiffres et symboles</label><br>
+                    <input required type="password" id="motDePasse" name="mdp" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^a-zA-Z0-9]).{12,}$"><br><br>
 
                     <label for="motDePasseConf">Confirmation Mot de Passe : *</label><br>
-                    <input required type="password" id="motDePasseConf" name="mdpConf" default=""><br><br>
+                    <input required type="password" id="motDePasseConf" name="mdpConf" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^a-zA-Z0-9]).{12,}$"><br><br>
 
                     <label for="nom">Nom : *</label><br>
-                    <input required type="text" id="nom" name="nom" default=""><br><br>
+                    <input required type="text" id="nom" name="nom" ><br><br>
                 </div>
                 <div>
                     <label for="prenom">Prenom : *</label><br>
-                    <input required type="text" id="prenom" name="prenom" default=""><br><br>
+                    <input required type="text" id="prenom" name="prenom"><br><br>
 
                     <label for="tel">Tel :</label><br>
-                    <input type="tel" id="tel" name="tel" default=""><br><br>
+                    <input type="tel" id="tel" name="tel" pattern="^0[1-9][0-9]{8}$" placeholder="0612345678"><br><br>
 
                     <label for="email">Email :</label><br>
-                    <input type="email" id="email" name="email" default=""><br><br>
+                    <input type="email" id="email" name="email" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" placeholder="exemple@domaine.extension"><br><br>
 
                 </div>
             </div>
