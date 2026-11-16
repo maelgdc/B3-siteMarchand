@@ -13,9 +13,9 @@ $nom = htmlspecialchars($_POST["nom"]);
 $nom_chif = chiffrer_donnee($nom, $crypt_key);
 $prenom = htmlspecialchars($_POST["prenom"]);
 $prenom_chif = chiffrer_donnee($prenom, $crypt_key);
-$tel = htmlspecialchars($_POST["tel"]);
+$tel = htmlspecialchars($_POST["tel"] ?? null);
 $tel_chif = chiffrer_donnee($tel, $crypt_key);
-$mail = htmlspecialchars($_POST["email"]);
+$mail = htmlspecialchars($_POST["email"] ?? null);
 $mail_chif = chiffrer_donnee($mail, $crypt_key);
 $clientTest = null;
 
@@ -33,7 +33,7 @@ try {
     echo "Erreur SQL : " . $monException->getMessage();
 }
 
-if ($mdp != $mdpConf) {
+if (!verif_donnees($pseudo, $mdp, $mdpConf, $mail, $tel)) {
     header("location:./index.php?page=inscription&erreur=1");
 } else {
     $resultat = false;
@@ -77,4 +77,17 @@ if ($mdp != $mdpConf) {
 if (isset($_GET["deco"])) {
     session_destroy();
     header("location:./index.php?page=acceuil");
+}
+
+function verif_donnees(string $login, string $mdp, string $mdpConf, ?string $mail, ?string $tel): bool
+{
+    if (
+        strlen($login) >= 4 &&
+        preg_match("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^a-zA-Z0-9]).{12,}$", $mdp) &&
+        preg_match("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$", $mail) || $mail==null &&
+        preg_match("^0[1-9][0-9]{8}$", $tel) | $tel==null &&
+        $mdp == $mdpConf
+    ) {
+        return True;
+    } else return False;
 }
