@@ -12,7 +12,7 @@ switch ($codeErreur) {
         $ereur = "Erreur dans la connexion BDD !";
         break;
     case 3:
-        $ereur = "Ce couple mot de passe / pseudo existe déjà.";
+        $ereur = "Ce pseudo existe déjà.";
         break;
     default:
         $ereur = "";

@@ -32,26 +32,27 @@ try {
 } catch (PDOException $monException) {
     echo "Erreur SQL : " . $monException->getMessage();
 }
-
+if (!empty($clientTest)) {
+    header("Location: ./index.php?page=inscription&erreur=3");
+    exit;
+}
 if (!verif_donnees($pseudo, $mdp, $mdpConf, $mail, $tel)) {
     header("location:./index.php?page=inscription&erreur=1");
 } else {
     $resultat = false;
     try {
-        if (sizeof($clientTest) == 0) {
-            $requeteInsertion = "INSERT INTO `client` (`IDCLIENT`, `PSEUDO`, `MDP`, `NOM`, `PRENOM`, `MAIL`, `TEL`) VALUES (NULL, :pseudo, :mdp, :nom, :prenom, :mail, :tel);";
-            $statement = $mon_pdo->prepare($requeteInsertion);
-            $resultat = $statement->execute([
-                ":pseudo" => $pseudo_chif,
-                ":mdp" => $mdp_hash,
-                ":nom" => $nom_chif,
-                ":prenom" => $prenom_chif,
-                ":mail" => $mail_chif,
-                ":tel" => $tel_chif
-            ]);
-        } else {
-            header("location:./index.php?page=inscription&erreur=3");
-        }
+
+
+        $requeteInsertion = "INSERT INTO `client` (`IDCLIENT`, `PSEUDO`, `MDP`, `NOM`, `PRENOM`, `MAIL`, `TEL`) VALUES (NULL, :pseudo, :mdp, :nom, :prenom, :mail, :tel);";
+        $statement = $mon_pdo->prepare($requeteInsertion);
+        $resultat = $statement->execute([
+            ":pseudo" => $pseudo_chif,
+            ":mdp" => $mdp_hash,
+            ":nom" => $nom_chif,
+            ":prenom" => $prenom_chif,
+            ":mail" => $mail_chif,
+            ":tel" => $tel_chif
+        ]);
     } catch (PDOException $monException) {
         echo "Erreur SQL : " . $monException->getMessage();
         header("location:./index.php?page=inscription&erreur=2");
@@ -83,9 +84,9 @@ function verif_donnees(string $login, string $mdp, string $mdpConf, ?string $mai
 {
     if (
         strlen($login) >= 4 &&
-        preg_match("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^a-zA-Z0-9]).{12,}$", $mdp) &&
-        preg_match("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$", $mail) || $mail==null &&
-        preg_match("^0[1-9][0-9]{8}$", $tel) | $tel==null &&
+        preg_match("/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^a-zA-Z0-9]).{12,}$/", $mdp) &&
+        preg_match("/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/", $mail) || $mail == null &&
+        preg_match("/^0[1-9][0-9]{8}$/", $tel) || $tel == null &&
         $mdp == $mdpConf
     ) {
         return True;

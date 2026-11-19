@@ -9,7 +9,6 @@ $crypt_key = $_ENV['encryption'];
 
 $pseudo_chif = chiffrer_donnee($pseudoCo, $crypt_key);
 
-
 $requete_sql = "SELECT * FROM client WHERE pseudo = :pseudo";
 
 $reponse = $mon_pdo->prepare($requete_sql);
@@ -18,9 +17,11 @@ $reponse->execute([
     ':pseudo' => $pseudo_chif
 ]);
 
-$client = $reponse->fetch(PDO::FETCH_ASSOC);
 
-if ($client && verifier_mdp($mdpCo, $client['MDP'])) {
+
+$client = $reponse->fetch(PDO::FETCH_ASSOC);
+if ($client!=null && verifier_mdp($mdpCo, $client['MDP'])) {
+    
     $tmpPath = __DIR__ . '/tmp';
     if (is_dir($tmpPath)) {
         session_save_path($tmpPath);
@@ -28,9 +29,9 @@ if ($client && verifier_mdp($mdpCo, $client['MDP'])) {
     session_start();
     $_SESSION['client'] = dechiffrer_donnee($client["PSEUDO"], $crypt_key);
     $_SESSION['idClient'] = $client["IDCLIENT"];
-    header("location:./index.php?page=produit&connexion=true");
+     header("location:./index.php?page=produit&connexion=true");
 } else {
-    header("location:./index.php?page=connexion&erreur=3");
+     header("location:./index.php?page=connexionClient&erreur=3");
 }
 
 

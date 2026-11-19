@@ -38,10 +38,10 @@ switch ($codeErreur) {
                 ?>
                 <form action="./connexion_exe.php" method="POST">
                     <label for="identifiant">Identifiant :</label><br>
-                    <input type="text" id="identifiant" name="login" default=""><br><br>
+                    <input type="text" id="identifiant" name="login" default="" required><br><br>
 
                     <label for="motDePasse">Mot de Passe :</label><br>
-                    <input type="password" id="motDePasse" name="mdp" default=""><br><br>
+                    <input type="password" id="motDePasse" name="mdp" default="" required><br><br>
 
 
                     <button type="submit" class="btn btn-primary" >Valider</button>
