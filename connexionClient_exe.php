@@ -31,7 +31,7 @@ if ($client!=null && verifier_mdp($mdpCo, $client['MDP'])) {
     $_SESSION['idClient'] = $client["IDCLIENT"];
      header("location:./index.php?page=produit&connexion=true");
 } else {
-     header("location:./index.php?page=connexionClient&erreur=3");
+     header("location:./index.php?page=connexionClient&erreur=1");
 }
 
 

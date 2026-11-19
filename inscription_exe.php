@@ -41,8 +41,6 @@ if (!verif_donnees($pseudo, $mdp, $mdpConf, $mail, $tel)) {
 } else {
     $resultat = false;
     try {
-
-
         $requeteInsertion = "INSERT INTO `client` (`IDCLIENT`, `PSEUDO`, `MDP`, `NOM`, `PRENOM`, `MAIL`, `TEL`) VALUES (NULL, :pseudo, :mdp, :nom, :prenom, :mail, :tel);";
         $statement = $mon_pdo->prepare($requeteInsertion);
         $resultat = $statement->execute([

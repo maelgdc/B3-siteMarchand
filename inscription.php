@@ -1,12 +1,8 @@
 <?php
-if (isset($_GET["erreur"])) {
-    $codeErreur = $_GET["erreur"];
-} else
-    $codeErreur = 0;
-
+$codeErreur = isset($_GET["erreur"]) ? $_GET["erreur"] : null;
 switch ($codeErreur) {
     case 1:
-        $ereur = "Mot de passe et confirmation différents !";
+        $ereur = "Données non conformes!";
         break;
     case 2:
         $ereur = "Erreur dans la connexion BDD !";
@@ -15,7 +11,7 @@ switch ($codeErreur) {
         $ereur = "Ce pseudo existe déjà.";
         break;
     default:
-        $ereur = "";
+        $ereur = null;
         break;
 }
 ?>
@@ -24,7 +20,7 @@ switch ($codeErreur) {
     <p id="erreur"></p>
     <div class="p-5" id="formLogin">
         <?php
-        if ($ereur != "") {
+        if ($ereur != null) {
         ?>
             <div class="alert alert-warning">
                 <p><?php
