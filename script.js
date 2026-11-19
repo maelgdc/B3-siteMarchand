@@ -1,24 +1,3 @@
-function verifierConnexion() {
-    let login = document.getElementById("identifiant").value;
-    let password = document.getElementById("motDePasse").value;
-    let coSecu = document.getElementById("coSecu").checked;
-    let domaine = document.getElementById("domaine").value;
-    let erreur = document.getElementById("erreur");
-    erreur.style.color = "red";
-    erreur.style.margin = "20px";
-    if (login.length < 7) {
-        erreur.innerText = "Identifiant Trop Court"
-    } else if (password === "") {
-        erreur.innerText = "Pas de mot de passe"
-    } else if (!coSecu) {
-        erreur.innerText = "Sécurisez connexion"
-    } else if (domaine != "Tec19") {
-        erreur.innerText = "Mauvais domaine"
-    } else {
-        alert("Connexion réussie !")
-        location.href = "admin.html"
-    }
-}
 
 function verifierContact() {
     let nom = document.getElementById("nom").value;
