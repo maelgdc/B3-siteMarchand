@@ -1,6 +1,3 @@
-#Eviter la mise à jour des données de connexion à la base de données
-info_bdd.php
-
 #Ajout partie 4 Gestion des secrets
 # Dépendances
 /vendor/
@@ -21,3 +18,8 @@ info_bdd.php
 # Tests et couverture
 /coverage/
 .phpunit.result.cache
+
+#Documentation
+/docs/*
+
+.phpdoc/*

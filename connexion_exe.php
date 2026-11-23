@@ -1,5 +1,5 @@
 <?php
-require './info_bdd.php';
+require 'info_bdd.php';
 $loginCo = $_POST["login"];
 $mdpCo = $_POST["mdp"];
 
