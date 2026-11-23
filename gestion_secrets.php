@@ -38,8 +38,10 @@ function verifier_mdp(string $mdp, string $hash): bool {
 *@param string $cle_chiffrement La cle de chiffrement
 *@return string $donnee_chiffre La donnee chiffree
 */
+
 function chiffrer_donnee (?string $donnee, string $cle_chiffrement): ?string {
 	if ($donnee == null ) return null;
+
 	$iv = '1234567890123456';
 	$donnee_chiffre = openssl_encrypt($donnee, 'aes-256-cbc', $cle_chiffrement, OPENSSL_RAW_DATA, $iv);
 	return base64_encode($donnee_chiffre);
