@@ -1,7 +1,7 @@
 <?php
 
 require './info_bdd.php';
-$page_autorise=['acceuil','produit','admin','connexion','connexionClient','inscription','detailProduit','commande_exe','panier','gestionCommande_exe','commande','apropos','mentionLegales'];
+$page_autorise=['acceuil','produit','admin','connexion','connexionClient','connexionClient_exe','inscription','detailProduit','commande_exe','panier','gestionCommande_exe','commande','apropos','mentionLegales'];
 
 if (isset($_GET['page'])){
     $page=$_GET['page'];

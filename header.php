@@ -45,7 +45,7 @@ session_start();
                 <p class="fs-5"><?php echo $_SESSION['client'] ?></p>
                 <a class="navbar-brand fs-3" href="./index.php?page=panier"><i class="bi bi-basket"></i></a>
                 <a class="navbar-brand fs-3" href="./index.php?page=commande"><i class="bi bi-clock-history"></i></i></a>
-                <a class="navbar-brand fs-3" href="./connexionClient_exe.php?deco=true"><i class="bi bi-box-arrow-in-right"></i> Déconnexion</a>
+                <a class="navbar-brand fs-3" href="./index.php?page=connexionClient_exe&deco=true"><i class="bi bi-box-arrow-in-right"></i> Déconnexion</a>
             <?php }
             ?>
 
