@@ -1,10 +1,6 @@
 <?php
 require_once __DIR__ . '/vendor/autoload.php';
 
-$hash_key = $_ENV['hash'];
-
-$crypt_key = $_ENV['encryption'];
-
 /**
 *Fonction de hashage du mot de passe
 **Cette fonction va permettre de retourner la string hashee avec la cle  de hashage passee
@@ -40,7 +36,7 @@ function verifier_mdp(string $mdp, string $hash): bool {
 */
 function chiffrer_donnee (?string $donnee, string $cle_chiffrement): ?string {
 	if ($donnee == null ) return null;
-	$iv = '1234567890123456';
+	$iv = $_ENV['iv'];
 	$donnee_chiffre = openssl_encrypt($donnee, 'aes-256-cbc', $cle_chiffrement, OPENSSL_RAW_DATA, $iv);
 	return base64_encode($donnee_chiffre);
 }
@@ -53,7 +49,7 @@ function chiffrer_donnee (?string $donnee, string $cle_chiffrement): ?string {
 *@return string $donnee_claire La donnee dechiffree
 */
 function dechiffrer_donnee (string $donnee_chiffree, string $cle_dechiffrement): string {
-	$iv = '1234567890123456';
+	$iv = $_ENV['iv'];
 	$donnee_claire = openssl_decrypt(base64_decode($donnee_chiffree), 'aes-256-cbc', $cle_dechiffrement, OPENSSL_RAW_DATA, $iv);
 	return $donnee_claire;
 }
